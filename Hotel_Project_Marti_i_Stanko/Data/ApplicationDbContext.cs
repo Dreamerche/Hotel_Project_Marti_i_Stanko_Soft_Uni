@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Hotel_Project_Marti_i_Stanko.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -12,5 +13,6 @@ namespace Hotel_Project_Marti_i_Stanko.Data
             : base(options)
         {
         }
-    }
+        public DbSet<Room> Rooms { get; set; }
+}
 }
