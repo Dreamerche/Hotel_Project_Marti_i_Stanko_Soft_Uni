@@ -9,10 +9,15 @@ namespace Hotel_Project_Marti_i_Stanko.Data
 {
     public class ApplicationDbContext : IdentityDbContext
     {
+        public ApplicationDbContext()
+        {
+        }
+
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
         }
         public DbSet<Room> Rooms { get; set; }
+        public DbSet<Hotel_Project_Marti_i_Stanko.Models.User> User { get; set; }
 }
 }
