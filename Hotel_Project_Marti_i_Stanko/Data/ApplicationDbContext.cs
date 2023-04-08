@@ -18,6 +18,10 @@ namespace Hotel_Project_Marti_i_Stanko.Data
         {
         }
         public DbSet<Room> Rooms { get; set; }
+        public DbSet<Client> Clients { get; set; }
+        public DbSet<Reservation> Reservations { get; set; }
+        public DbSet<ReservationClient> ReservationClients { get; set; }
+        
         public DbSet<Hotel_Project_Marti_i_Stanko.Models.User> User { get; set; }
 }
 }

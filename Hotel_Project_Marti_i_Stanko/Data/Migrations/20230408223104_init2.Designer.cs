@@ -4,14 +4,16 @@ using Hotel_Project_Marti_i_Stanko.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Hotel_Project_Marti_i_Stanko.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230408223104_init2")]
+    partial class init2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -56,23 +58,8 @@ namespace Hotel_Project_Marti_i_Stanko.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<DateTime>("checkInDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("includingBreakfast")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("isAllInclusive")
-                        .HasColumnType("bit");
-
                     b.Property<int?>("roomID")
                         .HasColumnType("int");
-
-                    b.Property<double>("totalPrice")
-                        .HasColumnType("float");
-
-                    b.Property<DateTime>("vacatingDate")
-                        .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 

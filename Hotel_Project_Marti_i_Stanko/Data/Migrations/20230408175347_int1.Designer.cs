@@ -4,14 +4,16 @@ using Hotel_Project_Marti_i_Stanko.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Hotel_Project_Marti_i_Stanko.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230408175347_int1")]
+    partial class int1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -47,60 +49,6 @@ namespace Hotel_Project_Marti_i_Stanko.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Clients");
-                });
-
-            modelBuilder.Entity("Hotel_Project_Marti_i_Stanko.Models.Reservation", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<DateTime>("checkInDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("includingBreakfast")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("isAllInclusive")
-                        .HasColumnType("bit");
-
-                    b.Property<int?>("roomID")
-                        .HasColumnType("int");
-
-                    b.Property<double>("totalPrice")
-                        .HasColumnType("float");
-
-                    b.Property<DateTime>("vacatingDate")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("roomID");
-
-                    b.ToTable("Reservations");
-                });
-
-            modelBuilder.Entity("Hotel_Project_Marti_i_Stanko.Models.ReservationClient", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("ClientId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ReservationId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ClientId");
-
-                    b.HasIndex("ReservationId");
-
-                    b.ToTable("ReservationClients");
                 });
 
             modelBuilder.Entity("Hotel_Project_Marti_i_Stanko.Models.Room", b =>
@@ -346,34 +294,6 @@ namespace Hotel_Project_Marti_i_Stanko.Data.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("Hotel_Project_Marti_i_Stanko.Models.Reservation", b =>
-                {
-                    b.HasOne("Hotel_Project_Marti_i_Stanko.Models.Room", "room")
-                        .WithMany()
-                        .HasForeignKey("roomID");
-
-                    b.Navigation("room");
-                });
-
-            modelBuilder.Entity("Hotel_Project_Marti_i_Stanko.Models.ReservationClient", b =>
-                {
-                    b.HasOne("Hotel_Project_Marti_i_Stanko.Models.Client", "Client")
-                        .WithMany("ReservationClients")
-                        .HasForeignKey("ClientId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Hotel_Project_Marti_i_Stanko.Models.Reservation", "Reservation")
-                        .WithMany("ReservationClients")
-                        .HasForeignKey("ReservationId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Client");
-
-                    b.Navigation("Reservation");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -423,16 +343,6 @@ namespace Hotel_Project_Marti_i_Stanko.Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("Hotel_Project_Marti_i_Stanko.Models.Client", b =>
-                {
-                    b.Navigation("ReservationClients");
-                });
-
-            modelBuilder.Entity("Hotel_Project_Marti_i_Stanko.Models.Reservation", b =>
-                {
-                    b.Navigation("ReservationClients");
                 });
 #pragma warning restore 612, 618
         }
