@@ -83,22 +83,18 @@ namespace Hotel_Project_Marti_i_Stanko.Data.Migrations
 
             modelBuilder.Entity("Hotel_Project_Marti_i_Stanko.Models.ReservationClient", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<int>("ReservationId")
+                        .HasColumnType("int");
 
                     b.Property<int>("ClientId")
                         .HasColumnType("int");
 
-                    b.Property<int>("ReservationId")
+                    b.Property<int>("Id")
                         .HasColumnType("int");
 
-                    b.HasKey("Id");
+                    b.HasKey("ReservationId", "ClientId");
 
                     b.HasIndex("ClientId");
-
-                    b.HasIndex("ReservationId");
 
                     b.ToTable("ReservationClients");
                 });
@@ -133,6 +129,21 @@ namespace Hotel_Project_Marti_i_Stanko.Data.Migrations
                     b.HasKey("ID");
 
                     b.ToTable("Rooms");
+                });
+
+            modelBuilder.Entity("Hotel_Project_Marti_i_Stanko.Models.User", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("username")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("User");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -198,10 +209,6 @@ namespace Hotel_Project_Marti_i_Stanko.Data.Migrations
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Discriminator")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Email")
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
@@ -253,8 +260,6 @@ namespace Hotel_Project_Marti_i_Stanko.Data.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers");
-
-                    b.HasDiscriminator<string>("Discriminator").HasValue("IdentityUser");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
@@ -335,16 +340,6 @@ namespace Hotel_Project_Marti_i_Stanko.Data.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
-                });
-
-            modelBuilder.Entity("Hotel_Project_Marti_i_Stanko.Models.User", b =>
-                {
-                    b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
-
-                    b.Property<string>("firstName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasDiscriminator().HasValue("User");
                 });
 
             modelBuilder.Entity("Hotel_Project_Marti_i_Stanko.Models.Reservation", b =>
