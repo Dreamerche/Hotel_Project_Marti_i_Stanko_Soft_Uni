@@ -7,50 +7,25 @@
 
 <h1>Create</h1>
 
-<div>
-    <h4>Adding a client to reservation</h4>
-    <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Reservation.checkInDate)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Reservation.checkInDate)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Reservation.vacatingDate)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Reservation.vacatingDate)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Reservation.includingBreakfast)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Reservation.includingBreakfast)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Reservation.isAllInclusive)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Reservation.isAllInclusive)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Reservation.totalPrice)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Reservation.totalPrice)
-        </dd>
-        </dl>
+<h4>ReservationClient</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
         <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="ReservationId" class="control-label"></label>
+                <select asp-for="ReservationId" class ="form-control" asp-items="ViewBag.ReservationId"></select>
+            </div>
             <div class="form-group">
                 <label asp-for="ClientId" class="control-label"></label>
-                <select asp-for="ClientId" class="form-control" asp-items="ViewBag.ClientId"></select>
+                <select asp-for="ClientId" class ="form-control" asp-items="ViewBag.ClientId"></select>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
         </form>
+    </div>
 </div>
 
 <div>

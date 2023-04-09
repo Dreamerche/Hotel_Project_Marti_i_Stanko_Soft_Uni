@@ -5,6 +5,11 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+@if(1>2){
+<h1>yes</h1>
+}
+@if(1<2){
+<h1>no</h1>}
 <h1>Details</h1>
 
 <div>
@@ -36,12 +41,26 @@
             @Html.DisplayFor(model => model.isAdult)
         </dd>
     </dl>
+    <h4>Reservations</h4>
+    @if (Model.ReservationClients is not null)
+    {
+        <h1>stupid1</h1>
+    }
+    @if (Model.ReservationClients!=null)
+    {
+        <h1>stupid2</h1>
+    }
+    @foreach (var reservation in Model.ReservationClients)
+    {
+        <a asp-controller="Reservations" asp-action="Details" asp-route-id="@reservation.Reservation.Id"><h1>lele</h1></a>
+        @if (reservation == null)
+        {
+            <a>ugh</a>
+        }
+    }
 </div>
 
-@foreach (var eventItem in Model.ReservationClients)
-{
-    <a asp-controller="Events" asp-action="Details" asp-route-id=" @eventItem.Reservation.Id">@eventItem.Reservation.Id</a>
-}
+
 <div>
     <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
     <a asp-action="Index">Back to List</a>
