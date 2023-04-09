@@ -61,6 +61,30 @@ namespace Hotel_Project_Marti_i_Stanko.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,ReservationId,ClientId")] ReservationClient reservationClient)
         {
+            var client = await _context.Clients.FindAsync(reservationClient.ClientId);
+            var @reservation = await _context.Reservations.FindAsync(reservationClient.ReservationId);
+
+            if (client == null || reservation == null)
+            {
+                return NotFound();
+            }
+
+            var contains = _context.ReservationClients
+                .Any(ea => ea.ReservationId == reservation.Id && ea.ClientId == client.Id);
+
+            if (!contains)
+            {
+                reservation.ReservationClients.Add(new ReservationClient()
+                {
+                    ClientId = client.Id,
+                    ReservationId = @reservation.Id
+                });
+            }
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+
+
+            /*
             if (ModelState.IsValid)
             {
                 _context.Add(reservationClient);
@@ -69,7 +93,7 @@ namespace Hotel_Project_Marti_i_Stanko.Controllers
             }
             ViewData["ClientId"] = new SelectList(_context.Clients, "Id", "firstName", reservationClient.ClientId);
             ViewData["ReservationId"] = new SelectList(_context.Reservations, "Id", "Id", reservationClient.ReservationId);
-            return View(reservationClient);
+            return View(reservationClient);*/
         }
 
         // GET: ReservationClients/Edit/5
